@@ -1,27 +1,31 @@
 # Hinge fallback
 
-A Pixel fold reports closed only when two readings agree. Hall sensor 0 must see the magnet, and the hinge angle must be near 0. Open is the state used when no closed condition matches.
+Follow these steps to switch to the cover screen when you fold the phone. The phone needs Android 14 or newer.
 
-On a phone whose second motion sensor never answers, the angle stays empty. The phone stays open, and the cover screen stays off. Hall sensor 0 still reports the magnet. A reading of 1 means closed.
+1. Download [hinge-fallback-1.0.apk](https://github.com/uzairayed/hinge-fallback/releases/download/v1.0/hinge-fallback-1.0.apk).
+2. Open the file on the phone and install it.
+3. Install [Shizuku](https://shizuku.rikka.app/download/).
+4. Turn on **Developer options**.
+5. Turn on **Wireless debugging**.
+6. Start Shizuku. The pairing steps are in the [Shizuku setup guide](https://shizuku.rikka.app/guide/setup/).
+7. Open **Hinge fallback**.
+8. Tap **Allow Shizuku**.
+9. Allow the permission prompt.
+10. Allow notifications when Android asks.
+11. Turn on **Watch the hinge**.
+12. Fold the phone. The cover screen comes on.
+13. Unfold the phone. The inner screen comes on.
 
-Hinge fallback watches that sensor. When the reading is at least 0.5, the watcher runs `cmd device_state base-state 0`. That command forces the closed state and turns the cover screen on. When the reading is lower, the watcher runs `cmd device_state base-state reset`. The phone returns to open, and the inner screen comes back.
+If the phone stays on the cover screen, turn **Watch the hinge** off.
 
-Android allows that command for the shell user through `android.permission.CONTROL_DEVICE_STATE`. A normal app cannot hold that permission. [Shizuku](https://shizuku.rikka.app/) runs the command as the shell user while its server is running.
+After a reboot, start Shizuku again. The watcher stays on.
 
-## Limits
-
-Half-open still needs a hinge angle. Hall sensor 0 is a magnet switch with two values, so it cannot supply that angle. The watcher forces closed, or it clears that force.
-
-Developer options have to stay on. Turning them off stops the shell user, and Shizuku stops with it. A banking app that refuses Developer options cannot run in the same session as the watcher.
-
-The cover camera is a separate hardware failure. This app does not publish it.
-
-Sensor 0 is `DRV5032 Hall Effect Sensor 0 (wake-up)`. Sensor 1 is `DRV5032 Hall Effect Sensor 1 (wake-up)`. Both use the type `com.google.sensor.hall_effect`. The app requires Android 14, API 34. The build targets a Pixel 9 Pro Fold running Android 17. A phone that names these sensors differently shows the error "Hall sensor 0 is not visible to this app."
+If a banking app refuses to open, turn **Developer options** off and use that app. Turn **Developer options** back on and start Shizuku again before you fold the phone.
 
 ## Read next
 
-The build steps are in [Build the debug APK](docs/build.md).
+Why the hall sensor can do this is in [How the watcher chooses a screen](docs/how-it-works.md).
 
-The phone steps are in [Use the watcher](docs/use.md).
+Build the app from source with [Build the debug APK](docs/build.md).
 
 The license is Apache 2.0. The terms are in [LICENSE](LICENSE).

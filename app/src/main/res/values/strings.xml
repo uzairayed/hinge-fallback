@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Hinge fallback</string>
+    <string name="subtitle">Uses the working hall sensor to switch between the cover screen and the inner screen.</string>
+    <string name="label_shizuku">Shizuku</string>
+    <string name="label_permission">Shell access</string>
+    <string name="label_hall0">Hall sensor 0</string>
+    <string name="label_hall1">Hall sensor 1</string>
+    <string name="label_state">Fold state</string>
+    <string name="allow_shizuku">Allow Shizuku</string>
+    <string name="watch_hinge">Watch the hinge</string>
+    <string name="turn_off">Turn off</string>
+    <string name="channel_name">Hinge watcher</string>
+    <string name="shizuku_running">Running</string>
+    <string name="shizuku_stopped">Not running. Start Shizuku, then come back.</string>
+    <string name="shizuku_missing">Shizuku is not installed.</string>
+    <string name="allowed">Allowed</string>
+    <string name="needed">Needed</string>
+    <string name="waiting">Waiting</string>
+    <string name="unknown">Unknown</string>
+    <string name="notification_required">Notifications are required so the watcher can keep running.</string>
+    <string name="footnote">Hall sensor 0 means closed when it reads 1. Open clears the override. Half-open still needs the missing motion sensor. After a reboot, start Shizuku again. If the phone sticks on the cover screen, turn the watcher off.</string>
+</resources>
